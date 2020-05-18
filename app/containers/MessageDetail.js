@@ -26,7 +26,7 @@ class MessageDetail extends Component {
 
   render() {
     const { currentMessage } = this.props
-    const { txt, time, sender, title } = currentMessage
+    const { txt, time, sender, title, type } = currentMessage
     return (
       <ScrollView
         style={{ flex: 1 }}
@@ -54,6 +54,12 @@ class MessageDetail extends Component {
             editable={false}
           >
             时间
+          </InputItem>
+          <InputItem
+            value={type}
+            editable={false}
+          >
+            类型
           </InputItem>
           <ListItem>正文：</ListItem>
           <TextareaItem

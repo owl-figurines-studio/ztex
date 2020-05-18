@@ -21,7 +21,7 @@ import Send from './containers/Send'
 import LookOver from './containers/LookOver'
 import MessageDetail from './containers/MessageDetail'
 
-const mapRouteToCN = { 'Home': '接收', 'Send':'发送', 'LookOver':'查看', 'Account':'我的', 'MessageDetail':'详情' }
+const mapRouteToCN = { 'Home': '接收', 'Send':'发稿', 'LookOver':'查看', 'Account':'我的', 'MessageDetail':'详情' }
 
 const HomeNavigator = createBottomTabNavigator({
   Home: { screen: Home },

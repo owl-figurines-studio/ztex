@@ -1,11 +1,13 @@
 import React from 'react'
 import { create } from 'dva-core'
+import createLoading from 'dva-loading'
 import { Provider, connect } from 'react-redux'
 
 export { connect }
 
 export default function(options) {
   const app = create(options)
+  app.use(createLoading({}))
   // HMR workaround
   if (!global.registered) options.models.forEach(model => app.model(model))
   global.registered = true
