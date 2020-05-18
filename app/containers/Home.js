@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { List, SwipeAction } from '@ant-design/react-native'
-import { Button } from '../components'
+import BasicPage from "./BasicPage"
+
 
 import { NavigationActions } from '../utils'
 
@@ -77,31 +78,33 @@ class Home extends Component {
   render() {
     const { messages } = this.props
     return (
-      <View style={{ paddingTop: 30 }}>
-        <List>
-          {
-            messages.map((item, index) => {
-              const { txt, time } = item
-              return (
-                <SwipeAction
-                  key={index}
-                  autoClose
-                  style={{ backgroundColor: 'transparent' }}
-                  right={this.getRight(index)}
-                  left={this.getLeft(index)}
-                  onOpen={() => console.log('open')}
-                  onClose={() => console.log('close')}
-                >
-                  <List.Item extra={time}>
-                    {txt}
-                  </List.Item>
-                </SwipeAction>
-              )
-            })
-          }
+      <BasicPage>
+        <View style={{ paddingTop: 30 }}>
+          <List>
+            {
+              messages.map((item, index) => {
+                const { txt, time } = item
+                return (
+                  <SwipeAction
+                    key={index}
+                    autoClose
+                    style={{ backgroundColor: 'transparent' }}
+                    right={this.getRight(index)}
+                    left={this.getLeft(index)}
+                    onOpen={() => console.log('open')}
+                    onClose={() => console.log('close')}
+                  >
+                    <List.Item extra={time}>
+                      {txt}
+                    </List.Item>
+                  </SwipeAction>
+                )
+              })
+            }
 
-        </List>
-      </View>
+          </List>
+        </View>
+      </BasicPage>
     )
   }
 }

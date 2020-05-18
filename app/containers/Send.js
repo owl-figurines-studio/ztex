@@ -5,6 +5,7 @@ import { List, InputItem, TextareaItem, Picker, Provider } from '@ant-design/rea
 import { Button } from '../components'
 import Loading from './Loading'
 import { NavigationActions } from '../utils'
+import BasicPage from "./BasicPage"
 import '@ant-design/icons-react-native'
 
 const ListItem = List.Item
@@ -82,63 +83,67 @@ class Send extends Component {
     const { type } = this.state
     const { addMessageLoading } = this.props
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-        automaticallyAdjustContentInsets={false}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-      >
-        {
-          addMessageLoading ? (
-            <Loading />
-          ) : (
-              <Provider>
-                <List renderHeader="详情">
-                  <InputItem
-                    clear
-                  >
-                    收信人
+      <BasicPage>
+        <View style={{ paddingTop: 30, height:1000 }}>
+          <ScrollView
+            style={{ flex: 1 }}
+            automaticallyAdjustContentInsets={false}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
+            {
+              addMessageLoading ? (
+                <Loading />
+              ) : (
+                  <Provider>
+                    <List renderHeader="详情">
+                      <InputItem
+                        clear
+                      >
+                        收信人
                 </InputItem>
-                  <Picker
-                    data={typeDate}
-                    cols={1}
-                    value={[type]}
-                    onChange={values => { const value = values[0]; this.typeChange(value) }}
-                  >
-                    <ListItem >
-                      类型选择
+                      <Picker
+                        data={typeDate}
+                        cols={1}
+                        value={[type]}
+                        onChange={values => { const value = values[0]; this.typeChange(value) }}
+                      >
+                        <ListItem >
+                          类型选择
                   </ListItem>
-                  </Picker>
-                  <InputItem
-                    clear
-                    onChange={value => this.setState({ title: value })}
-                  >
-                    标题
+                      </Picker>
+                      <InputItem
+                        clear
+                        onChange={value => this.setState({ title: value })}
+                      >
+                        标题
                 </InputItem>
 
-                  <TextareaItem
-                    placeholder="正文"
-                    clear
-                    rows={10}
-                    autoHeight
-                    style={{ paddingVertical: 5 }}
-                    onChange={value => this.setState({ txt: value })}
-                  />
-                  <ListItem>
-                    <Button
-                      onPress={() => {
-                        this.sendMessage()
-                      }}
-                      type="primary"
-                    >
-                      提交
+                      <TextareaItem
+                        placeholder="正文"
+                        clear
+                        rows={10}
+                        autoHeight
+                        style={{ paddingVertical: 5 }}
+                        onChange={value => this.setState({ txt: value })}
+                      />
+                      <ListItem>
+                        <Button
+                          onPress={() => {
+                            this.sendMessage()
+                          }}
+                          type="primary"
+                        >
+                          提交
                   </Button>
-                  </ListItem>
-                </List>
-              </Provider>
-            )
-        }
-      </ScrollView>
+                      </ListItem>
+                    </List>
+                  </Provider>
+                )
+            }
+          </ScrollView>
+        </View>
+      </BasicPage>
     )
   }
 }

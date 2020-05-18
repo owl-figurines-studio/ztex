@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Flex, WingBlank, Card, WhiteSpace } from '@ant-design/react-native'
 
 import { NavigationActions } from '../utils'
-import { Touchable } from '../components'
+import BasicPage from "./BasicPage"
 
 
 const mapStateToProps = ({ message }) => {
@@ -44,45 +44,49 @@ class LookOver extends Component {
   render() {
     const { messages } = this.props
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-        automaticallyAdjustContentInsets={false}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-      >
-        <WhiteSpace size="lg" />
-        <WingBlank style={{ marginBottom: 5 }}>
-          <Flex wrap='wrap' justify="start" >
-            {
-              messages.map((item, index) => {
-                const { txt, time, title, type } = item
-                const shortTxt = txt.length > 20 ? `${txt.substring(0, 20)}...` : txt
-                return (
-                  <Card
-                    key={index}
-                    style={{ width: 160, height: 150, marginLeft: 5, marginTop: 5 }} >
-                    <Card.Header
-                      title={title}
-                      extra={type}
-                    />
-                    <Card.Body>
-                      <TouchableOpacity onPress={() => this.goMessageDetail(index)}>
-                        <View style={{ height: 20 }} >
-                          <Text style={{ marginLeft: 16 }}>{shortTxt}</Text>
-                        </View>
-                      </TouchableOpacity>
-                    </Card.Body>
-                    <Card.Footer
-                      content={time}
-                    />
-                  </Card>
-                )
-              })
-            }
+      <BasicPage>
+        <View style={{ height: 1000 }}>
+          <ScrollView
+            style={{ flex: 1 }}
+            automaticallyAdjustContentInsets={false}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
+            <WhiteSpace size="lg" />
+            <WingBlank style={{ marginBottom: 5 }}>
+              <Flex wrap='wrap' justify="start" >
+                {
+                  messages.map((item, index) => {
+                    const { txt, time, title, type } = item
+                    const shortTxt = txt.length > 20 ? `${txt.substring(0, 20)}...` : txt
+                    return (
+                      <Card
+                        key={index}
+                        style={{ width: 160, height: 150, marginLeft: 5, marginTop: 5 }} >
+                        <Card.Header
+                          title={title}
+                          extra={type}
+                        />
+                        <Card.Body>
+                          <TouchableOpacity onPress={() => this.goMessageDetail(index)}>
+                            <View style={{ height: 20 }} >
+                              <Text style={{ marginLeft: 16 }}>{shortTxt}</Text>
+                            </View>
+                          </TouchableOpacity>
+                        </Card.Body>
+                        <Card.Footer
+                          content={time}
+                        />
+                      </Card>
+                    )
+                  })
+                }
 
-          </Flex>
-        </WingBlank>
-      </ScrollView>
+              </Flex>
+            </WingBlank>
+          </ScrollView>
+        </View>
+      </BasicPage>
     )
   }
 }

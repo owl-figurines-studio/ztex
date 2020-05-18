@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-
-import { Button, Touchable } from '../components'
+import { Button, InputItem, List, Card } from '@ant-design/react-native'
+import { Touchable } from '../components'
 
 import { createAction, NavigationActions } from '../utils'
 
@@ -27,8 +27,40 @@ class Login extends Component {
         {fetching ? (
           <ActivityIndicator />
         ) : (
-          <Button text="Login" onPress={this.onLogin} />
-        )}
+            // <Button text="Login" onPress={this.onLogin} />
+            <Card style={{ width:300 }} >
+              <Card.Header
+                title="登录"
+              />
+              <Card.Body>
+                <List>
+                  <InputItem
+                    clear
+                    placeholder="账号"
+                  >
+                    账号
+                  </InputItem>
+                  <InputItem
+                    clear
+                    placeholder="密码"
+                  >
+                    密码
+                  </InputItem>
+                  <List.Item>
+                    <Button
+                      onPress={this.onLogin}
+                      type="primary"
+                    >
+                      登录
+                    </Button>
+                  </List.Item>
+                </List>
+              </Card.Body>
+              <Card.Footer
+                content="Power by Tyto"
+              />
+            </Card>
+          )}
         {!fetching && (
           <Touchable style={styles.close} onPress={this.onClose}>
             <Image

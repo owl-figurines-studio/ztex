@@ -21,7 +21,7 @@ import Send from './containers/Send'
 import LookOver from './containers/LookOver'
 import MessageDetail from './containers/MessageDetail'
 
-const mapRouteToCN = { 'Home': '接收', 'Send':'发稿', 'LookOver':'查看', 'Account':'我的', 'MessageDetail':'详情' }
+const mapRouteToCN = { 'Home': '接收', 'Send': '发稿', 'LookOver': '查看', 'Account': '我的', 'MessageDetail': '详情' }
 
 const HomeNavigator = createBottomTabNavigator({
   Home: { screen: Home },
@@ -32,7 +32,6 @@ const HomeNavigator = createBottomTabNavigator({
 
 HomeNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index]
-
   return {
     headerTitle: mapRouteToCN[routeName] || routeName,
   }
@@ -109,12 +108,25 @@ function getActiveRouteName(navigationState) {
 
 @connect(({ app, router }) => ({ app, router }))
 class Router extends PureComponent {
+  
   componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.backHandle)
   }
 
+  componentDidMount() {
+    const { app } = this.props
+    const { login } = app
+    if (!login) {
+      this.gotoLogin()
+    }
+  }
+
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.backHandle)
+  }
+
+  gotoLogin = () => {
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'Login' }))
   }
 
   backHandle = () => {
