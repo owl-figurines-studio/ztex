@@ -17,9 +17,16 @@ import Login from './containers/Login'
 import Home from './containers/Home'
 import Account from './containers/Account'
 import Detail from './containers/Detail'
+import Send from './containers/Send'
+import LookOver from './containers/LookOver'
+import MessageDetail from './containers/MessageDetail'
+
+const mapRouteToCN = { 'Home': '接收', 'Send':'发送', 'LookOver':'查看', 'Account':'我的', 'MessageDetail':'详情' }
 
 const HomeNavigator = createBottomTabNavigator({
   Home: { screen: Home },
+  Send: { screen: Send },
+  LookOver: { screen: LookOver },
   Account: { screen: Account },
 })
 
@@ -27,7 +34,7 @@ HomeNavigator.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index]
 
   return {
-    headerTitle: routeName,
+    headerTitle: mapRouteToCN[routeName] || routeName,
   }
 }
 
@@ -35,6 +42,7 @@ const MainNavigator = createStackNavigator(
   {
     HomeNavigator: { screen: HomeNavigator },
     Detail: { screen: Detail },
+    MessageDetail: { screen: MessageDetail }
   },
   {
     headerMode: 'float',
