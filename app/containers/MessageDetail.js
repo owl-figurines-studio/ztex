@@ -24,57 +24,68 @@ class MessageDetail extends Component {
     this.props.dispatch(NavigationActions.back({ routeName: 'Account' }))
   }
 
+  getTxt = content => {
+    let txt = ""
+    content.forEach(item => {
+      const { type, value } = item
+      if (type === 'txt') {
+        txt += value
+      }
+    })
+    return txt
+  }
+
   render() {
     const { currentMessage } = this.props
-    const { txt, time, sender, title, type } = currentMessage
+    const { content, time, sender, title, type } = currentMessage
+    const txt = this.getTxt(content)
     return (
-      <BasicPage  >
-        <View style={{ height: 1000 }}>
-          <ScrollView
-            style={{ flex: 1 }}
-            automaticallyAdjustContentInsets={false}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-          >
-            <List renderHeader="详情">
-              <InputItem
-                value={title}
-                editable={false}
-              >
-                标题
+
+      <ScrollView
+        style={{ flex: 1 }}
+        automaticallyAdjustContentInsets={false}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <BasicPage  >
+          <List renderHeader="详情">
+            <InputItem
+              value={title}
+              editable={false}
+            >
+              标题
           </InputItem>
 
-              <InputItem
-                value={sender}
-                editable={false}
-              >
-                发信人
+            <InputItem
+              value={sender}
+              editable={false}
+            >
+              发信人
           </InputItem>
 
-              <InputItem
-                value={time}
-                editable={false}
-              >
-                时间
+            <InputItem
+              value={time}
+              editable={false}
+            >
+              时间
           </InputItem>
-              <InputItem
-                value={type}
-                editable={false}
-              >
-                类型
+            <InputItem
+              value={type}
+              editable={false}
+            >
+              类型
           </InputItem>
-              <ListItem>正文：</ListItem>
-              <TextareaItem
-                rows={4}
-                value={txt}
-                autoHeight
-                style={{ paddingVertical: 5 }}
-                editable={false}
-              />
-            </List>
-          </ScrollView>
-        </View>
-      </BasicPage>
+            <ListItem>正文：</ListItem>
+            <TextareaItem
+              rows={4}
+              value={txt}
+              autoHeight
+              style={{ paddingVertical: 5 }}
+              editable={false}
+            />
+          </List>
+        </BasicPage>
+      </ScrollView>
     )
   }
 }

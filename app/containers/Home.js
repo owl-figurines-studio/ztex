@@ -83,7 +83,8 @@ class Home extends Component {
           <List>
             {
               messages.map((item, index) => {
-                const { txt, time } = item
+                const { content, time } = item
+                const { value: txt } = content.find(contentItem => contentItem.type === 'txt')
                 return (
                   <SwipeAction
                     key={index}

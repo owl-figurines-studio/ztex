@@ -20,6 +20,7 @@ import Detail from './containers/Detail'
 import Send from './containers/Send'
 import LookOver from './containers/LookOver'
 import MessageDetail from './containers/MessageDetail'
+import PaperDetail from './containers/PaperDetail'
 
 const mapRouteToCN = { 'Home': '接收', 'Send': '发稿', 'LookOver': '查看', 'Account': '我的', 'MessageDetail': '详情' }
 
@@ -40,7 +41,7 @@ HomeNavigator.navigationOptions = ({ navigation }) => {
 const MainNavigator = createStackNavigator(
   {
     HomeNavigator: { screen: HomeNavigator },
-    Detail: { screen: Detail },
+    PaperDetail: { screen: PaperDetail },
     MessageDetail: { screen: MessageDetail }
   },
   {

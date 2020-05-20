@@ -26,7 +26,7 @@ class LookOver extends Component {
   }
 
   gotoDetail = () => {
-    this.props.dispatch(NavigationActions.navigate({ routeName: 'Detail' }))
+    this.props.dispatch(NavigationActions.navigate({ routeName: 'PaperDetail' }))
   }
 
   goMessageDetail = index => {
@@ -38,7 +38,7 @@ class LookOver extends Component {
         currentMessage: messages[index]
       },
     })
-    dispatch(NavigationActions.navigate({ routeName: 'MessageDetail' }))
+    dispatch(NavigationActions.navigate({ routeName: 'PaperDetail' }))
   }
 
   render() {
@@ -57,7 +57,8 @@ class LookOver extends Component {
               <Flex wrap='wrap' justify="start" >
                 {
                   messages.map((item, index) => {
-                    const { txt, time, title, type } = item
+                    const { content, time, title, type } = item
+                    const { value: txt } = content.find(contentItem => contentItem.type === 'txt')
                     const shortTxt = txt.length > 20 ? `${txt.substring(0, 20)}...` : txt
                     return (
                       <Card
